@@ -1,12 +1,23 @@
-import React from 'react'
+import PropertyCard from "@/components/PropertyCard";
+import properties from "@/properties.json";
+
 
 const Properties = () => {
-  return (
-    <div>
-      <h1 className="text-3xl">Properties</h1>
-      <a href="/">Go Home</a>
-    </div>
-  )
-}
+	return (
+		<section class='px-4 py-6'>
+			<div class='container-xl lg:container m-auto px-4 py-6'>
+				{properties.length === 0 ? (
+					<div>No properties</div>
+				) : (
+					<div class='grid grid-cols-1 md:grid-cols-3 gap-6'>
+						{properties.map((property) => (
+							<PropertyCard key={property._id} property={property}/>
+						))}
+					</div>
+				)}
+			</div>
+		</section>
+	);
+};
 
-export default Properties
+export default Properties;
