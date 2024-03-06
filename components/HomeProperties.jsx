@@ -1,6 +1,8 @@
 import properties from "@/properties.json";
 import PropertyCard from "./PropertyCard";
 import Link from "next/link";
+
+
 const HomeProperties = () => {
 	const recentProperties = properties
 		.sort(() => Math.random() - Math.random())
