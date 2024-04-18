@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { fetchProperty } from "@/utils/requests";
 import PropertyHeaderImage from "@/components/PropertyHeaderImage";
+import PropertyNavigation from "@/components/PropertyNavigation";
+import PropertyDetails from "@/components/PropertyDetails";
+
+import Spinner from "@/components/Spinner";
 
 const PropertyPage = () => {
 	const { id } = useParams();
@@ -40,10 +44,13 @@ const PropertyPage = () => {
 		);
 	}
 	return (
-		<>
+		<>	
+			{loading && <Spinner loading={loading}/> }
 			{!loading && property && (
 				<>
 					<PropertyHeaderImage image={property.images[0]} />
+					<PropertyNavigation />
+					<PropertyDetails propertyDetails={property}/>
 				</>
 			)}
 		</>
