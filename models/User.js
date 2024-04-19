@@ -9,7 +9,7 @@ const UserSchema = new Schema(
 		},
 		username: {
 			type: String,
-			required: [true, "Email is required"],
+			required: [true, "Username is required"],
 		},
 		image: {
 			type: String,
@@ -26,6 +26,6 @@ const UserSchema = new Schema(
 	}
 );
 
-const User = models.user || model("User", UserSchema);
+const User = models.User || model("User", UserSchema);
 
 export default User;
