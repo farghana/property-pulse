@@ -221,6 +221,10 @@ const NavBar = () => {
 											Saved Properties
 										</Link>
 										<Link
+										onClick={() => {
+											setIsProfileMenuOpen(false);
+											signOut()
+										}}
 											href='#'
 											className='block px-4 py-2 text-sm text-gray-700'
 											role='menuitem'
