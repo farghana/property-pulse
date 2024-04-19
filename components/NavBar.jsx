@@ -3,13 +3,14 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import appLogo from "@/assets/images/logo-white.png";
-import profileImage from "@/assets/images/profile.png";
+import profileDefaultImage from "@/assets/images/profile.png";
 import Image from "next/image";
 import { FaGoogle } from "react-icons/fa";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const NavBar = () => {
 	const { data: session } = useSession();
+	const profileImage = session?.user?.image;
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 	const [providers, setProviders] = useState(null);
@@ -183,8 +184,10 @@ const NavBar = () => {
 										</span>
 										<Image
 											className='h-8 w-8 rounded-full'
-											src={profileImage}
+											src={profileImage || profileDefaultImage}
 											alt=''
+											width={40}
+											height={40}
 										/>
 									</button>
 								</div>
