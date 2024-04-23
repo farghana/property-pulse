@@ -1,12 +1,13 @@
 import connectDB from "@/config/database";
 import Property from "@/models/Property";
 import { getSessionUser } from "@/utils/getSessionUser";
+import cloudinary from "@/config/cloudinary";
 
 export const GET = async (request) => {
 	try {
 		await connectDB();
 		const properties = await Property.find({});
-		//console.log(properties)
+		console.log(properties)
 		return new Response(JSON.stringify(properties), { status: 200 });
 	} catch (error) {
 		console.log(error);
@@ -57,15 +58,40 @@ export const POST = async (request) => {
 			owner: userId,
 		};
 
-		console.log(formData);
+		// Upload image(s) to Cloudinary
+		const imageUploadPromises = [];
+
+		for (const image of images) {
+		  const imageBuffer = await image.arrayBuffer();
+		  const imageArray = Array.from(new Uint8Array(imageBuffer));
+		  const imageData = Buffer.from(imageArray);
+	
+		  // Convert the image data to base64
+		  const imageBase64 = imageData.toString('base64');
+	
+		  // Make request to upload to Cloudinary
+		  const result = await cloudinary.uploader.upload(
+			`data:image/png;base64,${imageBase64}`,
+			{
+			  folder: 'propertypulse',
+			}
+		  );
+	
+		  imageUploadPromises.push(result.secure_url);
+	
+		  // Wait for all images to upload
+		  const uploadedImages = await Promise.all(imageUploadPromises);
+		  // Add uploaded images to the propertyData object
+		  propertyData.images = uploadedImages;
+		}
 		const newProperty = new Property(propertyData);
 		await newProperty.save();
 
-		return Response.redirect(`${process.env.NEXTAUTH_URL}/properties/${newProperty._id}`)
-		// return new Response(JSON.stringify({ message: "Property Added" }), {
-		// 	status: 200,
-		// });
+		return Response.redirect(
+			`${process.env.NEXTAUTH_URL}/properties/${newProperty._id}`
+		);
 	} catch (error) {
+		console.log(error.error);
 		return new Response("Failed to add property", { status: 500 });
 	}
 };
