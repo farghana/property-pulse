@@ -39,7 +39,7 @@ const PropertyDetails = ({ propertyDetails }) => {
 										Nightly
 									</div>
 									<div className='text-2xl font-bold text-blue-500'>
-										{rates.nightly ? (
+										{rates?.nightly ? (
 											`$${rates.nightly.toLocaleString()}`
 										) : (
 											<FaTimes className='fa fa-xmark text-red-700' />
@@ -51,7 +51,7 @@ const PropertyDetails = ({ propertyDetails }) => {
 										Weekly
 									</div>
 									<div className='text-2xl font-bold text-blue-500'>
-										{rates.weekly ? (
+										{rates?.weekly ? (
 											`$${rates.weekly.toLocaleString()}`
 										) : (
 											<FaTimes className='fa fa-xmark text-red-700' />
@@ -63,7 +63,7 @@ const PropertyDetails = ({ propertyDetails }) => {
 										Monthly
 									</div>
 									<div className='text-2xl font-bold text-blue-500'>
-										{rates.monthly ? (
+										{rates?.monthly ? (
 											`$${rates.monthly.toLocaleString()}`
 										) : (
 											<FaTimes className='fa fa-xmark text-red-700' />

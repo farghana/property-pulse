@@ -11,19 +11,19 @@ const PropertyAddForm = () => {
 			state: "",
 			zipcode: "",
 		},
-		beds: "",
-		baths: "",
-		square_feet: "",
+		beds: "2",
+		baths: "1",
+		square_feet: "2000",
 		amenities: ["Free Parking"],
 		rates: {
 			weekly: "",
-			monthly: "",
+			monthly: "3000",
 			nightly: "",
 		},
 		seller_info: {
-			name: "",
-			email: "",
-			phone: "",
+			name: "Farghana",
+			email: "farghana@gmail.com",
+			phone: "1223232",
 		},
 		images: [],
 	});
@@ -86,7 +86,7 @@ const PropertyAddForm = () => {
 
     };
 	return (
-		<form>
+		<form action="/api/properties" method="POST" encType="multipart/form-data">
 			<h2 className='text-3xl text-center font-semibold mb-6'>
 				Add Property
 			</h2>
@@ -542,7 +542,7 @@ const PropertyAddForm = () => {
 				<input
 					type='text'
 					id='seller_name'
-					name='seller_info.name.'
+					name='seller_info.name'
 					className='border rounded w-full py-2 px-3'
 					placeholder='Name'
 					value={inputFields.seller_info.name}
@@ -600,6 +600,7 @@ const PropertyAddForm = () => {
 					accept='image/*'
 					multiple
 					onChange={handleImageChange}
+                    required
 				/>
 			</div>
 
