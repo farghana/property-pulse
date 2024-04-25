@@ -5,6 +5,7 @@ import { fetchProperty } from "@/utils/requests";
 import PropertyHeaderImage from "@/components/PropertyHeaderImage";
 import PropertyNavigation from "@/components/PropertyNavigation";
 import PropertyDetails from "@/components/PropertyDetails";
+import PropertyImages from "@/components/PropertyImages";
 
 import Spinner from "@/components/Spinner";
 
@@ -51,6 +52,7 @@ const PropertyPage = () => {
 					<PropertyHeaderImage image={property.images[0]} />
 					<PropertyNavigation />
 					<PropertyDetails propertyDetails={property}/>
+					<PropertyImages images={property.images} />
 				</>
 			)}
 		</>
