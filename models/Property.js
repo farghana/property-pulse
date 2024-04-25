@@ -5,7 +5,11 @@ const PropertySchema = new Schema(
 		owner: {
 			type: Schema.Types.ObjectId,
 			ref: "User",
-			required: [true, "Email is required"],
+			required: true,
+		},
+		name: {
+			type: String,
+			required: true,
 		},
 		type: {
 			type: String,
