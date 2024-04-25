@@ -99,7 +99,7 @@ const ProfilePage = () => {
 								<Spinner loading={{ loading }} />
 							) : (
 								properties.map((property) => (
-									<div className='mb-10'>
+									<div className='mb-10' key={property._id}>
 										<Link
 											href={`/properties/${property._id}`}
 										>
@@ -109,6 +109,7 @@ const ProfilePage = () => {
 												width={500}
 												height={100}
 												priority={true}
+												alt={property.name}
 											/>
 										</Link>
 										<div className='mt-2'>
@@ -124,7 +125,7 @@ const ProfilePage = () => {
 										</div>
 										<div className='mt-2'>
 											<Link
-												href={`/property/edit/${property._id}`}
+												href={`/properties/edit/${property._id}`}
 												className='bg-blue-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-blue-600'
 											>
 												Edit
