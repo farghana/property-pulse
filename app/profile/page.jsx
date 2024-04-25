@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import profileDefault from "@/assets/images/profile.png";
 import { useState, useEffect } from "react";
 import Spinner from "@/components/Spinner";
+import {toast} from 'react-toastify'
 
 const ProfilePage = () => {
 	const { data: session } = useSession();
@@ -52,11 +53,13 @@ const ProfilePage = () => {
 				//remove property
 				const updatedProperties = properties.filter((property => property._id!==propertyId));
 				setProperties(updatedProperties);
-				alert('property deleted')
+				toast.success('Property deleted')
 			}else{
-				alert(res)
+				toast.error('Failed to delete property')
 			}
-		} catch (error) {}
+		} catch (error) {
+			toast.error(error)
+		}
 	};
 	return (
 		<section className='bg-blue-50'>

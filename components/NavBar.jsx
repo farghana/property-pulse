@@ -209,7 +209,7 @@ const NavBar = () => {
 											tabIndex='-1'
 											id='user-menu-item-0'
 											onClick={()=>{
-												setIsMenuOpen(false)
+												setIsProfileMenuOpen(false)
 											}}
 										>
 											Your Profile
