@@ -203,7 +203,7 @@ const NavBar = () => {
 										tabIndex='-1'
 									>
 										<Link
-											href='/profile.html'
+											href='/profile'
 											className='block px-4 py-2 text-sm text-gray-700'
 											role='menuitem'
 											tabIndex='-1'
@@ -229,7 +229,7 @@ const NavBar = () => {
 										<Link
 										onClick={() => {
 											setIsProfileMenuOpen(false);
-											signOut()
+											signOut({callbackUrl: '/'})
 										}}
 											href='#'
 											className='block px-4 py-2 text-sm text-gray-700'

@@ -13,7 +13,6 @@ export const GET = async (request, {params}) => {
         }
         
 		const properties = await Property.find({owner: userId});
-        console.log(params)
 
 		return new Response(JSON.stringify(properties), { status: 200 });
 	} catch (error) {
