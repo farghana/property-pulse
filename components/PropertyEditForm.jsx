@@ -2,11 +2,15 @@ import { useState, useEffect } from "react";
 import { fetchProperty } from "@/utils/requests";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useSession } from "next-auth/react";
 
 const PropertyEditForm = () => {
 	const { id } = useParams();
 	const router = useRouter();
 	const [loading, setLoading] = useState(true);
+	const { data: session } = useSession();
+	const userId = session?.user?.id;
+
 
 	const [inputFields, setInputFields] = useState({
 		type: "",
@@ -38,6 +42,10 @@ const PropertyEditForm = () => {
 		const fetchPropertyData = async () => {
 			try {
 				const propertyData = await fetchProperty(id);
+				if(propertyData.owner.toString() !== userId){
+					toast.error('Access denied.')
+					router.push('/')
+				}
 				//check rates for null and replacd with empty string
 				if (propertyData && propertyData.rates) {
 					const defaultRates = { ...propertyData.rates };
@@ -100,7 +108,26 @@ const PropertyEditForm = () => {
 		}));
 	};
 
-	const handleSubmit = async () => {};
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		try {
+			const formData = new FormData(e.target);
+			const res = await fetch(`/api/properties/${id}`, {
+				method: "PUT",
+				body: formData,
+			});
+			if (res.status === 200) {
+				router.push(`/properties/${id}`);
+			} else if (res.status === 401 || res.status === 401) {
+				toast.error("Permission denied");
+			} else {
+				toast.error("Something went wrong");
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	return (
 		!loading && (
 			<form onSubmit={handleSubmit}>
