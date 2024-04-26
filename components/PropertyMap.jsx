@@ -20,7 +20,7 @@ const PropertyMap = ({ property }) => {
 	});
 	const [loading, setLoading] = useState(true);
 
-	const [geocodeError, setGeocodeError] = useState(false);
+  const [geocodeError, setGeocodeError] = useState(false);
 
 	setDefaults({
 		key: process.env.NEXT_PUBLIC_GOOGLE_GEOCODING_API_KEY,
@@ -62,10 +62,10 @@ const PropertyMap = ({ property }) => {
 	}, []);
 
 	if (loading) return <Spinner loading={{ loading }} />;
-	// Handle case where geocoding failed
-	if (geocodeError) {
-		return <div className='text-xl'>No location data found</div>;
-	}
+    // Handle case where geocoding failed
+  if (geocodeError) {
+    return <div className='text-xl'>No location data found</div>;
+  }
 	return (
 		!loading && (
 			<Map
