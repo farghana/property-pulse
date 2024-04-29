@@ -12,7 +12,7 @@ const PropertySearchForm = () => {
 		if(searchTerm === '' && propertyType === 'All'){
 			router.push('/properties')
 		}else{
-			const query = `?search=${searchTerm}&type=${propertyType}`;
+			const query = `?search=${searchTerm}&propertyType=${propertyType}`;
 			router.push(`/properties/search-results${query}`)
 		}
 	};
