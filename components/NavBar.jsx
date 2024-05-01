@@ -132,7 +132,7 @@ const NavBar = () => {
 					{session && (
 						<div className='absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0'>
 							<Link
-								href='messages.html'
+								href='/messages'
 								className='relative group'
 							>
 								<button
@@ -215,7 +215,7 @@ const NavBar = () => {
 											Your Profile
 										</Link>
 										<Link
-											href='saved-properties.html'
+											href='properties/saved'
 											className='block px-4 py-2 text-sm text-gray-700'
 											role='menuitem'
 											tabIndex='-1'
