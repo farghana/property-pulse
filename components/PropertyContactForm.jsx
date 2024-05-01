@@ -31,8 +31,9 @@ const PropertyContactForm = ({ property }) => {
 				body: JSON.stringify(data),
 			});
 			if (res.status === 200) {
+				const data = await res.json();
 				toast.success(data.message);
-				wasSubmitted(true);
+				setWasSubmitted(true);
 			} else if (res.status === 400 || res.status === 401) {
 				const dataObj = await res.json();
 				toast.error(dataObj.message);
