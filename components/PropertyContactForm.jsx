@@ -1,8 +1,8 @@
 "use client";
-import { useState } from 'react';
-import { FaPaperPlane } from 'react-icons/fa';
-import { toast } from 'react-toastify';
-import { useSession } from 'next-auth/react';
+import { useState } from "react";
+import { FaPaperPlane } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useSession } from "next-auth/react";
 
 const PropertyContactForm = ({ property }) => {
 	const { data: session } = useSession();
@@ -31,8 +31,7 @@ const PropertyContactForm = ({ property }) => {
 				body: JSON.stringify(data),
 			});
 			if (res.status === 200) {
-				const data = await res.json();
-				toast.success(data.message);
+				toast.success("Message sent successfully");
 				setWasSubmitted(true);
 			} else if (res.status === 400 || res.status === 401) {
 				const dataObj = await res.json();
@@ -55,8 +54,8 @@ const PropertyContactForm = ({ property }) => {
 		<div className='bg-white p-6 rounded-lg shadow-md'>
 			<h3 className='text-xl font-bold mb-6'>Contact Property Manager</h3>
 			{!session ? (
-        <p>You must be logged in to send a message</p>
-      ) : wasSubmitted ? (
+				<p>You must be logged in to send a message</p>
+			) : wasSubmitted ? (
 				<p className='text-green-500 mb-4'>
 					Message has been sent successfully.
 				</p>
