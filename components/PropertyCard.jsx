@@ -72,7 +72,7 @@ const PropertyCard = ({ property }) => {
 					)}
 					{property.rates.nightly && (
 						<p>
-							<FaMoneyBill className='inline mr-2' /> Night
+							<FaMoneyBill className='inline mr-2' /> Nightly
 						</p>
 					)}
 				</div>
