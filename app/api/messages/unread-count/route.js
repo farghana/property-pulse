@@ -19,11 +19,11 @@ export const GET = async (request) => {
 		}
 		const { userId } = sessionUser;
 
-		const unreadMesages = await Message.countDocuments({
+		const unreadMessagesCount = await Message.countDocuments({
 			recipient: userId,
 			read: false,
 		});
-		return new Response(JSON.stringify(count), {
+		return new Response(JSON.stringify(unreadMessagesCount), {
 			status: 200,
 		});
 	} catch (error) {

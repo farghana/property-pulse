@@ -22,19 +22,19 @@ export const GET = async (request) => {
 			recipient: userId,
 			read: true,
 		})
-			.sort({ createdAt: -1 }) //sort read messages in asc order
-			.populate("sender", "name")
+			.sort({ createdAt: -1 }) // Sort read messages in asc order
+			.populate("sender", "username")
 			.populate("property", "name");
 
-		const unReadMessages = await Message.find({
+		const unreadMessages = await Message.find({
 			recipient: userId,
 			read: false,
 		})
-			.sort({ createdAt: -1 }) //sort read messages in asc order
-			.populate("sender", "name")
+			.sort({ createdAt: -1 }) // Sort read messages in asc order
+			.populate("sender", "username")
 			.populate("property", "name");
 
-		const messages = [...unReadMessages, ...readMessages];
+		const messages = [...unreadMessages, ...readMessages];
 
 		return new Response(JSON.stringify(messages), { status: 200 });
 	} catch (error) {
