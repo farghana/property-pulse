@@ -31,7 +31,7 @@ export const PUT = async (request, { params }) => {
         message.read = !message.read;
         await message.save();
 
-        return new Response(JSON.stringify({message}), {status: 200})
+        return new Response(JSON.stringify(message), {status: 200})
 
 	} catch (error) {
         console.log(error);
