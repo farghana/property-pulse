@@ -23,6 +23,7 @@ const PropertyImages = ({images}) => {
                             height={0}
                             sizes='100vw'
                             priority={true}
+                            alt='Property Images'
                             />
                          </div>
                     ))}

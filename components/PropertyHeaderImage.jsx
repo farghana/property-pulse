@@ -1,5 +1,4 @@
 import Image from "next/image";
-import propertyImage from "@/assets/images/properties/a1.jpg";
 
 const PropertyHeaderImage = ({ image }) => {
 	return (
