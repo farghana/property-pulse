@@ -5,6 +5,7 @@ import Spinner from "@/components/Spinner";
 
 const Properties = () => {
 	const [properties, setProperties] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchProperties = async () => {
@@ -20,12 +21,16 @@ const Properties = () => {
 				}
 			} catch (error) {
 				console.log(error);
+			} finally {
+				setLoading(false);
 			}
 		};
-    fetchProperties()
+		fetchProperties();
 	}, []);
 
-	return (
+	return loading ? (
+		<Spinner loading={loading} />
+	) : (
 		<section className='px-4 py-6'>
 			<div className='container-xl lg:container m-auto px-4 py-6'>
 				{properties?.length === 0 ? (
