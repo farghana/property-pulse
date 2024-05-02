@@ -2,22 +2,22 @@
 import { useState, useEffect } from "react";
 import PropertyCard from "@/components/PropertyCard";
 import Spinner from "@/components/Spinner";
+import Pagination from "@/components/Pagination";
 
 const Properties = () => {
 	const [properties, setProperties] = useState([]);
 	const [loading, setLoading] = useState(true);
-
+	const [page, setPage] = useState(1);
+	const [pageSize, setPageSize] = useState(6);
+	const [totalCount, setTotalCount] = useState(0);
 	useEffect(() => {
 		const fetchProperties = async () => {
 			try {
-				const res = await fetch(`/api/properties/`);
+				const res = await fetch(`/api/properties?page=${page}&pageSize=${pageSize}`);
 				if (res.status === 200) {
-					const properties = await res.json();
-					//sort propeties by date
-					properties.sort(
-						(a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-					);
-					setProperties(properties);
+					const data = await res.json();
+          setTotalCount(data.total);
+					setProperties(data.properties);
 				}
 			} catch (error) {
 				console.log(error);
@@ -26,8 +26,11 @@ const Properties = () => {
 			}
 		};
 		fetchProperties();
-	}, []);
+	}, [page, pageSize]);
 
+  const handlePageChange = (newPage) =>{
+      setPage(newPage);
+  }
 	return loading ? (
 		<Spinner loading={loading} />
 	) : (
@@ -45,6 +48,7 @@ const Properties = () => {
 						))}
 					</div>
 				)}
+        <Pagination page={page} pageSize={pageSize} totalCount={totalCount} onPageChange={handlePageChange} />
 			</div>
 		</section>
 	);
